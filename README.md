@@ -324,7 +324,7 @@ MTG Deck Builder is a tool for users to search a database of all the Magic: The 
 |  Day | Deliverable | Status
 |---|---| ---|
 |June 8| Project Prompt | Complete
-|June 9| Core Application Structure / Build and Test Search Form / Page Buttons | Incomplete
+|June 9| Core Application Structure / Build and Test Search Form / Page Buttons | Complete
 |June 10| Details Pane Rendering / Advanced Styling / MVP  | Incomplete
 |June 11| *Deck Storage* / *Deck Panel and Rendering* / *Deck Shuffling*  | Incomplete
 |June 12| *Test Hand Button & View* / *Advanced Styling* | Incomplete
