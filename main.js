@@ -1,4 +1,4 @@
-async function searchAPI(pageSize) {
+async function fetchCards(pageSize) {
   let url = `https://api.magicthegathering.io/v1/cards?pageSize=${pageSize}`
   url += buildQueries()
   try {
@@ -83,5 +83,8 @@ async function fillTypes() {
 fillSets()
 fillTypes()
 
-// Test search
-document.querySelector('#search-bar').addEventListener('click', () => searchAPI(100))
+
+document.querySelector('form').addEventListener('submit', () => {
+  event.preventDefault()
+  fetchCards(100)
+})
