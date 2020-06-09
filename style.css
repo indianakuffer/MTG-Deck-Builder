@@ -62,7 +62,15 @@ header {
   text-align: right;
 }
 
+
 #detail-panel {
   background-color: bisque;
   flex-grow: 1;
+}
+
+
+#search-form-container {
+  position: absolute;
+  top: 10vh;
+  left: 10vw;
 }

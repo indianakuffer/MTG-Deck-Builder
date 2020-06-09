@@ -8,20 +8,32 @@ async function searchAPI(pageSize) {
   } catch (error) {
     console.error(error)
   }
+  console.log(url)
 }
+
 
 function buildQueries() {
   let queryList = []
+
+  // name
   let name = document.querySelector('#input-name').value
-  name = 'Fireball'
   if (name !== '') {
-    name = '&name=' + name
-    queryList.push(name)
+    queryList.push('&name=' + name)
   }
 
-  let results = queryList.join('')
-  console.log('results', results)
-  return results
+  // colors
+  let colors = ''
+  let colorList = document.querySelectorAll('.input-color')
+  colorList.forEach(color => {
+    color.checked ? colors += color.value : null
+  })
+  colors ? queryList.push('&colors=' + colors) : null
+
+
+  let parsedQueries = queryList.join('')
+  return parsedQueries
 }
 
-searchAPI(4)
+
+
+document.querySelector('#search-bar').addEventListener('click', () => searchAPI(12))
