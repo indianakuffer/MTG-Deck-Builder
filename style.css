@@ -46,6 +46,14 @@ header {
 #card-container {
   flex-basis: 100%;
   background-color: white;
+  overflow: auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.card {
+  margin: 15px;
 }
 
 #page-btn-container {

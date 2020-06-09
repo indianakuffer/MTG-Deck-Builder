@@ -5,6 +5,11 @@ async function fetchCards(pageSize) {
     const response = await axios.get(url)
     const cardList = response.data.cards
     console.log(cardList)
+
+    cardList.forEach((card) => {
+      renderCard(card)
+    })
+
   } catch (error) {
     console.error(error)
   }
@@ -48,7 +53,6 @@ function buildQueries() {
   return parsedQueries
 }
 
-
 async function fillSets() {
   try {
     const response = await axios.get('https://api.magicthegathering.io/v1/sets')
@@ -79,6 +83,16 @@ async function fillTypes() {
   }
 }
 
+function renderCard(card) {
+  // cards with no imageUrls seem to be duplicates, skip over those
+  if (!card.imageUrl) { return }
+
+  const cardElement = document.createElement('img')
+  cardElement.classList.add('card')
+  cardElement.src = card.imageUrl
+
+  document.querySelector('#card-container').append(cardElement)
+}
 
 fillSets()
 fillTypes()
