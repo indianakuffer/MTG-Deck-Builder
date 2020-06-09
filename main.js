@@ -5,7 +5,6 @@ async function searchAPI(pageSize) {
     const response = await axios.get(url)
     const cardList = response.data.cards
     console.log(cardList)
-    cardList.forEach(card => console.log(card.rarity))
   } catch (error) {
     console.error(error)
   }
@@ -39,6 +38,10 @@ function buildQueries() {
   // rarity
   let rarity = document.querySelector('#input-rarity').value
   rarity !== '' ? queryList.push('&rarity=' + rarity) : null
+
+  // mana cost
+  let manaCost = document.querySelector('#input-mana').value
+  manaCost !== '' ? queryList.push('&cmc=' + manaCost) : null
 
   // return parsed queries
   let parsedQueries = queryList.join('')
