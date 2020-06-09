@@ -45,7 +45,6 @@ header {
 
 #card-container {
   flex-basis: 100%;
-  background-color: white;
   overflow: auto;
   display: flex;
   flex-flow: row wrap;

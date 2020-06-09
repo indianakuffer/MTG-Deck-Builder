@@ -1,6 +1,11 @@
-async function fetchCards(pageSize) {
-  let url = `https://api.magicthegathering.io/v1/cards?pageSize=${pageSize}`
+let previousSearch
+let pageSize = 50
+
+async function fetchCards(page = 1) {
+  let url = `https://api.magicthegathering.io/v1/cards?pageSize=${pageSize}&page=${page}`
   url += buildQueries()
+  // clears card-container on reload
+  document.querySelector('#card-container').innerHTML = ''
   try {
     const response = await axios.get(url)
     const cardList = response.data.cards
@@ -13,7 +18,8 @@ async function fetchCards(pageSize) {
   } catch (error) {
     console.error(error)
   }
-  console.log(url)
+  previousSearch = url
+  console.log('Previous Search', previousSearch)
 }
 
 
@@ -48,7 +54,6 @@ function buildQueries() {
   let manaCost = document.querySelector('#input-mana').value
   manaCost !== '' ? queryList.push('&cmc=' + manaCost) : null
 
-  // return parsed queries
   let parsedQueries = queryList.join('')
   return parsedQueries
 }
@@ -84,7 +89,7 @@ async function fillTypes() {
 }
 
 function renderCard(card) {
-  // cards with no imageUrls seem to be duplicates, skip over those
+  // cards with no imageUrls seem to be duplicates, skips over those
   if (!card.imageUrl) { return }
 
   const cardElement = document.createElement('img')
@@ -94,11 +99,28 @@ function renderCard(card) {
   document.querySelector('#card-container').append(cardElement)
 }
 
+function turnPage(dir) {
+  const pageLocation = previousSearch.indexOf('page=')
+  let pageString = previousSearch.substring(pageLocation, pageLocation + 6)
+  let pageNum = parseInt(pageString[pageString.length - 1])
+
+  // stops page from going below 0
+  if (pageNum + dir === 0) {
+    console.warn('Page cannot go below 0.')
+    return
+  }
+  fetchCards(pageNum + dir)
+}
+
+
 fillSets()
 fillTypes()
 
 
 document.querySelector('form').addEventListener('submit', () => {
   event.preventDefault()
-  fetchCards(100)
+  fetchCards()
 })
+
+document.querySelector('.page-btn.left').addEventListener('click', () => turnPage(-1))
+document.querySelector('.page-btn.right').addEventListener('click', () => turnPage(1))
