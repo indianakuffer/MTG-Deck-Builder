@@ -338,7 +338,7 @@ MTG Deck Builder is a tool for users to search a database of all the Magic: The 
 
 | Component | Priority | Estimated Time | Time Invested | Actual Time |
 | --- | :---: |  :---: | :---: | :---: |
-| Core HTML & CSS | M | 1.5hrs| n/a | n/a |
+| Core HTML & CSS | M | 1.5hrs| 1.25hrs | 1.25hrs |
 | API Fetch w/ Queries | H | 2.5hrs| n/a | n/a |
 | Render Cards to DOM | H | 1hrs| n/a | n/a |
 | Page Buttons | M | 1hrs| n/a | n/a |
