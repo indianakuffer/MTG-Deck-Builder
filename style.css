@@ -1,0 +1,70 @@
+body {
+  margin: 0px;
+}
+
+#main-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+
+#card-panel {
+  display: flex;
+  flex-flow: column;
+  background-color: rgb(241, 158, 103);
+  flex-basis: 70vw;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  padding: 0px 40px;
+}
+
+#search-bar {
+  display: flex;
+  flex-flow: row;
+  background-color: white;
+  border-radius: 15px;
+  width: 180px;
+  height: 40px;
+  align-items: center;
+}
+
+#search-icn {
+  flex-basis: 20%;
+  margin-left: 20px;
+}
+
+#search-bar div {
+  margin: 10px;
+}
+
+#card-container {
+  flex-basis: 100%;
+  background-color: white;
+}
+
+#page-btn-container {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+
+.page-btn {
+  margin: 20px 0px 30px 0px;
+}
+
+.page-btn.left {
+  text-align: right;
+}
+
+
+#detail-panel {
+  background-color: bisque;
+  flex-grow: 1;
+}
+
