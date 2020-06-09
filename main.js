@@ -10,7 +10,7 @@ async function fetchCards(page = 1) {
     const response = await axios.get(url)
     const cardList = response.data.cards
     console.log(cardList)
-
+    if (cardList.length === 0) { alert('Sorry, that returned no results.') }
     cardList.forEach((card) => {
       renderCard(card)
     })
