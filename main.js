@@ -112,6 +112,12 @@ function turnPage(dir) {
   fetchCards(pageNum + dir)
 }
 
+function toggleSearch() {
+  event.preventDefault()
+
+  const search = document.querySelector('#search-form-container')
+  search.classList.toggle('hidden')
+}
 
 fillSets()
 fillTypes()
@@ -120,7 +126,14 @@ fillTypes()
 document.querySelector('form').addEventListener('submit', () => {
   event.preventDefault()
   fetchCards()
+  toggleSearch()
 })
 
+document.querySelector('#search-bar').addEventListener('click', toggleSearch)
+document.querySelector('#search-form-container').addEventListener('click', toggleSearch)
+// stopPropogation needed to allow users to click from without hiding the overlay
+document.querySelector('#search-form').addEventListener('click', () => {
+  event.stopPropagation()
+})
 document.querySelector('.page-btn.left').addEventListener('click', () => turnPage(-1))
 document.querySelector('.page-btn.right').addEventListener('click', () => turnPage(1))

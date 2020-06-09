@@ -1,5 +1,6 @@
 body {
   margin: 0px;
+  color: white;
 }
 
 #main-container {
@@ -10,14 +11,16 @@ body {
 
 
 #card-panel {
+  border: 1px dashed blue;
   display: flex;
   flex-flow: column;
-  background-color: rgb(241, 158, 103);
   flex-basis: 70vw;
 }
 
 header {
+  border: 1px dashed green;
   display: flex;
+  position: relative;
   justify-content: space-between;
   align-items: center;
   height: 100px;
@@ -28,6 +31,7 @@ header {
   display: flex;
   flex-flow: row;
   background-color: white;
+  color: black;
   border-radius: 15px;
   width: 180px;
   height: 40px;
@@ -43,6 +47,31 @@ header {
   margin: 10px;
 }
 
+#search-form-container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: opacity 0.4s ease, max-height 1s ease;
+  z-index: 999;
+}
+
+#search-form {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+  padding: 10px;
+  z-index: 9999;
+}
+
 #card-container {
   flex-basis: 100%;
   overflow: auto;
@@ -53,6 +82,7 @@ header {
 
 .card {
   margin: 15px;
+  border-radius: 10px;
 }
 
 #page-btn-container {
@@ -71,18 +101,97 @@ header {
 
 
 #detail-panel {
-  background-color: bisque;
+  border: 1px dashed red;
   flex-grow: 1;
 }
 
-
-#search-form-container {
-  position: absolute;
-  top: 10vh;
-  left: 10vw;
+.expands {
+  max-height: 300px;
+  overflow: hidden;
 }
 
-#search-form {
-  display: flex;
-  flex-flow: column;
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  max-height: 0px;
+}
+
+/* Understand this later */
+/* https://codepen.io/WebSonick/pen/vjmgu */
+/* ============================================================================================== 
+SED Innovations
+https://sed.am
+https://mkrtchyan.ga
+================================================================================================= */
+
+@keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}
+@-webkit-keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}
+@-moz-keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}
+@-ms-keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}
+
+@keyframes move-clouds-back {
+    from {background-position:0 0;}
+    to {background-position:10000px 0;}
+}
+@-webkit-keyframes move-clouds-back {
+    from {background-position:0 0;}
+    to {background-position:10000px 0;}
+}
+@-moz-keyframes move-clouds-back {
+    from {background-position:0 0;}
+    to {background-position:10000px 0;}
+}
+@-ms-keyframes move-clouds-back {
+    from {background-position: 0;}
+    to {background-position:10000px 0;}
+}
+
+.stars, .twinkling, .clouds {
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  width:100%;
+  height:100%;
+  display:block;
+}
+
+.stars {
+  background:#000 url(http://www.script-tutorials.com/demos/360/images/stars.png) repeat top center;
+  z-index:-101;
+}
+
+.twinkling{
+  background:transparent url(http://www.script-tutorials.com/demos/360/images/twinkling.png) repeat top center;
+  z-index:-100;
+
+  -moz-animation:move-twink-back 200s linear infinite;
+  -ms-animation:move-twink-back 200s linear infinite;
+  -o-animation:move-twink-back 200s linear infinite;
+  -webkit-animation:move-twink-back 200s linear infinite;
+  animation:move-twink-back 200s linear infinite;
+}
+
+.clouds{
+    background:transparent url(http://www.script-tutorials.com/demos/360/images/clouds3.png) repeat top center;
+    z-index:-99;
+
+  -moz-animation:move-clouds-back 200s linear infinite;
+  -ms-animation:move-clouds-back 200s linear infinite;
+  -o-animation:move-clouds-back 200s linear infinite;
+  -webkit-animation:move-clouds-back 200s linear infinite;
+  animation:move-clouds-back 200s linear infinite;
 }

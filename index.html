@@ -19,6 +19,58 @@
           <img id='search-icn' src="" alt="icn">
           <div>search</div>
         </div>
+        <div id='search-form-container' class='hidden'>
+          <form id='search-form'>
+            <input id='input-name' type="text" placeholder='name'>
+            <div>
+              <input id='input-red' class='input-color' type="checkbox" value='red,'>
+              <label for='input-red'>Red</label>
+            </div>
+            <div>
+              <input id='input-blue' class='input-color' type="checkbox" value='blue,'>
+              <label for='input-blue'>Blue</label>
+            </div>
+            <div>
+              <input id='input-white' class='input-color' type="checkbox" value='white,'>
+              <label for='input-white'>White</label>
+            </div>
+            <div>
+              <input id='input-black' class='input-color' type="checkbox" value='black,'>
+              <label for='input-black'>Black</label>
+            </div>
+            <div>
+              <input id='input-green' class='input-color' type="checkbox" value='green,'>
+              <label for='input-green'>Green</label>
+            </div>
+            <div>
+              <label for='input-sets'>Set</label>
+              <select id='input-sets'>
+                <option value=''>--</option>
+              </select>
+            </div>
+            <div>
+              <label for='input-types'>Type</label>
+              <select id='input-types'>
+                <option value=''>--</option>
+              </select>
+            </div>
+            <div>
+              <label for='input-rarity'>Rarity</label>
+              <select id='input-rarity'>
+                <option value=''>--</option>
+                <option value='common'>Common</option>
+                <option value='uncommon'>Uncommon</option>
+                <option value='rare'>Rare</option>
+                <option value='mythic'>Mythic</option>
+              </select>
+            </div>
+            <div>
+              <label for='input-mana'>Mana Cost</label>
+              <input id='input-mana' type='text'>
+            </div>
+            <button id='search-btn'>Search</button>
+          </form>
+        </div>
       </header>
       <div id='card-container'></div>
       <div id='page-btn-container'>
@@ -31,58 +83,9 @@
       <div id='deck-container'></div>
     </div>
   </div>
-  <div id='search-form-container'>
-    <form id='search-form'>
-      <input id='input-name' type="text" placeholder='name'>
-      <div>
-        <input id='input-red' class='input-color' type="checkbox" value='red,'>
-        <label for='input-red'>Red</label>
-      </div>
-      <div>
-        <input id='input-blue' class='input-color' type="checkbox" value='blue,'>
-        <label for='input-blue'>Blue</label>
-      </div>
-      <div>
-        <input id='input-white' class='input-color' type="checkbox" value='white,'>
-        <label for='input-white'>White</label>
-      </div>
-      <div>
-        <input id='input-black' class='input-color' type="checkbox" value='black,'>
-        <label for='input-black'>Black</label>
-      </div>
-      <div>
-        <input id='input-green' class='input-color' type="checkbox" value='green,'>
-        <label for='input-green'>Green</label>
-      </div>
-      <div>
-        <label for='input-sets'>Set</label>
-        <select id='input-sets'>
-          <option value=''>--</option>
-        </select>
-      </div>
-      <div>
-        <label for='input-types'>Type</label>
-        <select id='input-types'>
-          <option value=''>--</option>
-        </select>
-      </div>
-      <div>
-        <label for='input-rarity'>Rarity</label>
-        <select id='input-rarity'>
-          <option value=''>--</option>
-          <option value='common'>Common</option>
-          <option value='uncommon'>Uncommon</option>
-          <option value='rare'>Rare</option>
-          <option value='mythic'>Mythic</option>
-        </select>
-      </div>
-      <div>
-        <label for='input-mana'>Mana Cost</label>
-        <input id='input-mana' type='text'>
-      </div>
-      <button id='search-btn'>Search</button>
-    </form>
-  </div>
+  <div class='stars'></div>
+  <div class='twinkling'></div>
+  <div class='clouds'></div>
 </body>
 
 </html>
