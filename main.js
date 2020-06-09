@@ -5,6 +5,7 @@ async function searchAPI(pageSize) {
     const response = await axios.get(url)
     const cardList = response.data.cards
     console.log(cardList)
+    cardList.forEach(card => console.log(card.rarity))
   } catch (error) {
     console.error(error)
   }
@@ -27,9 +28,17 @@ function buildQueries() {
   })
   colors ? queryList.push('&colors=' + colors) : null
 
-  // set
+  // sets
   let set = document.querySelector('#input-sets').value
   set !== '' ? queryList.push('&setName=' + set) : null
+
+  // types
+  let type = document.querySelector('#input-types').value
+  type !== '' ? queryList.push('&types=' + type) : null
+
+  // rarity
+  let rarity = document.querySelector('#input-rarity').value
+  rarity !== '' ? queryList.push('&rarity=' + rarity) : null
 
   // return parsed queries
   let parsedQueries = queryList.join('')
@@ -52,7 +61,24 @@ async function fillSets() {
   }
 }
 
+async function fillTypes() {
+  try {
+    const response = await axios.get('https://api.magicthegathering.io/v1/types')
+    const dropdown = document.querySelector('#input-types')
+    response.data.types.forEach(type => {
+      const newOption = document.createElement('option')
+      newOption.innerText = type
+      newOption.value = type
+      dropdown.append(newOption)
+    })
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+
 fillSets()
+fillTypes()
 
 // Test search
-document.querySelector('#search-bar').addEventListener('click', () => searchAPI(12))
+document.querySelector('#search-bar').addEventListener('click', () => searchAPI(100))
