@@ -17,9 +17,7 @@ function buildQueries() {
 
   // name
   let name = document.querySelector('#input-name').value
-  if (name !== '') {
-    queryList.push('&name=' + name)
-  }
+  name !== '' ? queryList.push('&name=' + name) : null
 
   // colors
   let colors = ''
@@ -29,11 +27,32 @@ function buildQueries() {
   })
   colors ? queryList.push('&colors=' + colors) : null
 
+  // set
+  let set = document.querySelector('#input-sets').value
+  set !== '' ? queryList.push('&setName=' + set) : null
 
+  // return parsed queries
   let parsedQueries = queryList.join('')
   return parsedQueries
 }
 
 
+async function fillSets() {
+  try {
+    const response = await axios.get('https://api.magicthegathering.io/v1/sets')
+    const dropdown = document.querySelector('#input-sets')
+    response.data.sets.forEach(set => {
+      const newOption = document.createElement('option')
+      newOption.innerText = set.name
+      newOption.value = set.name
+      dropdown.append(newOption)
+    })
+  } catch (error) {
+    console.error(error)
+  }
+}
 
+fillSets()
+
+// Test search
 document.querySelector('#search-bar').addEventListener('click', () => searchAPI(12))

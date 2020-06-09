@@ -74,3 +74,8 @@ header {
   top: 10vh;
   left: 10vw;
 }
+
+#search-form {
+  display: flex;
+  flex-flow: column;
+}
