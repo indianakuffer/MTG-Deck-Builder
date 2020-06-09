@@ -299,7 +299,9 @@ MTG Deck Builder is a tool for users to search a database of all the Magic: The 
 
 ## Wireframes
 
-NEED TO ADD
+![Browser Wireframes](https://i.imgur.com/XsiwFnL.png)
+
+![Mobile Wireframes](https://i.imgur.com/51QUcsc.png)
 
 ### MVP/PostMVP
 
@@ -330,7 +332,7 @@ NEED TO ADD
 
 ## Priority Matrix
 
-NEED TO ADD
+![Priority Matrix](https://i.imgur.com/2AsGMnl.png)
 
 ## Timeframes
 
