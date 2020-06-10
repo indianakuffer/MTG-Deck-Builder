@@ -199,6 +199,35 @@ header {
 
 }
 
+#test-hand-btn {
+  width: 100px;
+}
+
+#test-hand-container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: opacity 0.4s ease, max-height 1s ease;
+  z-index: 999;
+}
+
+#test-hand {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+  padding: 20px;
+  z-index: 9999;
+}
+
 .btn {
   border: 1px solid transparent;
   border-radius: 8px;

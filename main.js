@@ -182,11 +182,8 @@ function turnPage(dir) {
   fetchCards(pageNum + dir)
 }
 
-function toggleSearch() {
-  event.preventDefault()
-
-  const search = document.querySelector('#search-form-container')
-  search.classList.toggle('hidden')
+function toggleHidden(element) {
+  element.classList.toggle('hidden')
 }
 
 function toggleDeckView() {
@@ -243,21 +240,44 @@ function shuffleDeck() {
   return shuffledDeck
 }
 
+function testHand() {
+  const handContainer = document.querySelector('#test-hand')
+  handContainer.innerHTML = ''
+  const shuffledDeck = shuffleDeck()
+  let hand = []
+  for (let i = 0; i < shuffledDeck.length; i++) {
+    if (i > 6) { continue }
+    hand.push(shuffledDeck[i])
+  }
+  hand.forEach(card => {
+    const image = document.createElement('img')
+    image.src = card.imageUrl
+    handContainer.append(image)
+  })
+  toggleHidden(document.querySelector('#test-hand-container'))
+}
+
 document.querySelector('form').addEventListener('submit', () => {
   event.preventDefault()
   fetchCards()
-  toggleSearch()
+  toggleHidden(document.querySelector('#search-form-container'))
 })
 
-document.querySelector('#search-bar').addEventListener('click', toggleSearch)
-document.querySelector('#search-form-container').addEventListener('click', toggleSearch)
+document.querySelector('#search-bar').addEventListener('click', () => { toggleHidden(document.querySelector('#search-form-container')) })
+document.querySelector('#search-form-container').addEventListener('click', () => { toggleHidden(document.querySelector('#search-form-container')) })
 // stopPropogation needed to allow users to click from without hiding the overlay
 document.querySelector('#search-form').addEventListener('click', () => {
+  event.stopPropagation()
+})
+document.querySelector('#test-hand-container').addEventListener('click', () => toggleHidden(document.querySelector('#test-hand-container')))
+// stopPropogation needed to allow users to click from without hiding the overlay
+document.querySelector('#test-hand').addEventListener('click', () => {
   event.stopPropagation()
 })
 document.querySelector('.page-btn.left').addEventListener('click', () => turnPage(-1))
 document.querySelector('.page-btn.right').addEventListener('click', () => turnPage(1))
 document.querySelector('#detail-view-btn').addEventListener('click', toggleDeckView)
+document.querySelector('#test-hand-btn').addEventListener('click', testHand)
 
 fillSets()
 fillTypes()
