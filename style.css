@@ -3,6 +3,7 @@ html, body {
   height: 100%;
   overflow-x: hidden;
   margin: 0px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -17,14 +18,12 @@ body {
 
 
 #card-panel {
-  border: 1px dashed blue;
   display: flex;
   flex-flow: column;
   flex-basis: 65vw;
 }
 
 header {
-  border: 1px dashed green;
   display: flex;
   position: relative;
   justify-content: space-between;
@@ -37,20 +36,31 @@ header {
   display: flex;
   flex-flow: row;
   background-color: white;
-  color: black;
+  color: #3f3f3f;
   border-radius: 15px;
   width: 180px;
   height: 40px;
   align-items: center;
+  transition: transform 0.1s ease;
+}
+
+#search-bar:hover {
+  cursor: pointer;
+  transform: scale(1.05)
 }
 
 #search-icn {
   flex-basis: 20%;
   margin-left: 20px;
+  width: 20px;
+  height: 20px;
+  background-image: url(./images/search-icon.png);
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
-#search-bar div {
-  margin: 10px;
+#search-text {
+  margin-left: 10px;
 }
 
 #search-form-container {
@@ -74,8 +84,30 @@ header {
   border-radius: 10px;
   background-color: white;
   color: black;
-  padding: 10px;
+  padding: 20px;
   z-index: 9999;
+}
+
+#search-form > * {
+  margin: 8px 0px;
+}
+
+#search-form label {
+  font-size: 18px;
+}
+
+#search-form input {
+  font-size: 16px;
+}
+
+#search-form select {
+  font-size: 14px;
+}
+
+#search-btn {
+  margin: 40px 0 5px 0;
+  align-self: center;
+  letter-spacing: 1px;
 }
 
 #card-container {
@@ -88,12 +120,14 @@ header {
 
 .card {
   margin: 15px;
-  border-radius: 10px;
+  border-radius: 14px;
   flex-basis: 250px;
+  transition: transform 0.2s ease;
 }
 
 .card:hover {
-  /* flex-basis: 300px; */
+  transform: scale(1.1);
+  cursor: help;
 }
 
 #page-btn-container {
@@ -104,6 +138,12 @@ header {
 
 .page-btn {
   margin: 20px 20px 30px 20px;
+  border-bottom: 1px solid transparent;
+}
+
+.page-btn:hover {
+  cursor: pointer;
+  border-color: white;
 }
 
 .page-btn.left {
@@ -112,8 +152,13 @@ header {
 
 
 #detail-panel {
-  border: 1px dashed red;
+  position: relative;
   flex-basis: 35vw;
+  border-left: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+#detail-view-btn {
+  position: absolute;
 }
 
 #detail-container {
@@ -121,10 +166,37 @@ header {
   flex-flow: column;
   justify-content: space-around;
   align-items: center;
+  padding: 20px;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .detail-card {
   width: 60%;
+  max-width: 400px;
+  border-radius: 14px;
+}
+
+.info-container {
+  max-width: 600px;
+}
+
+#add-to-deck-btn {
+
+}
+
+.btn {
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 5px 20px;
+  font-size: 18px;
+  background-color: #c63535;
+  color: white;
+  transition: transform 0.2s ease;
+}
+
+.btn:hover {
+  transform: scale(1.1);
 }
 
 .expands {

@@ -111,6 +111,7 @@ function moreDetails(card) {
 
   // info
   const info = document.createElement('div')
+  info.classList.add('info-container')
 
   // name
   const name = document.createElement('p')
@@ -140,6 +141,8 @@ function moreDetails(card) {
   const button = document.createElement('button')
   button.textContent = 'Add to Deck'
   button.addEventListener('click', () => { addToDeck(card) })
+  button.id = 'add-to-deck-btn'
+  button.classList.add('btn')
 
   detailContainer.append(image)
   detailContainer.append(info)
