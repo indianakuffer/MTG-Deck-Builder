@@ -155,7 +155,6 @@ header {
   position: relative;
   flex-basis: 35vw;
   border-left: 2px solid rgba(255, 255, 255, 0.1);
-  overflow-x: hidden;
 }
 
 #detail-view-btn {
@@ -191,7 +190,13 @@ header {
 }
 
 #deck-container {
-  /* display: none; */
+}
+
+#deck {
+}
+
+.listing {
+
 }
 
 .btn {
@@ -214,6 +219,7 @@ header {
 }
 
 .hidden {
+  display: none;
   visibility: hidden;
   opacity: 0;
   max-height: 0px;

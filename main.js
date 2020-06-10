@@ -192,18 +192,55 @@ function toggleSearch() {
 function toggleDeckView() {
   const detailContainer = document.querySelector('#detail-container')
   const deckContainer = document.querySelector('#deck-container')
+  const iconImage = document.querySelector('#detail-view-btn')
 
   detailContainer.classList.toggle('hidden')
   deckContainer.classList.toggle('hidden')
+  detailContainer.classList.contains('hidden') ? iconImage.src = './images/card-icon.png' : iconImage.src = './images/deck-icon.png'
 }
 
 function renderDeckList() {
-  document.querySelector('#deck-container').innerHTML = ''
+  document.querySelector('#deck').innerHTML = ''
   for (const card in deck) {
     const listing = document.createElement('div')
     listing.textContent = `${deck[card].name} - x${deck[card].quantity}`
-    document.querySelector('#deck-container').append(listing)
+    listing.classList.add('listing')
+
+    const removeButton = document.createElement('span')
+    removeButton.innerText = 'remove'
+    removeButton.addEventListener('click', () => removeCard(card))
+
+    document.querySelector('#deck').append(listing)
+    listing.append(removeButton)
   }
+}
+
+function removeCard(card) {
+  deck[card].quantity -= 1
+  if (deck[card].quantity <= 0) {
+    delete deck[card]
+  }
+  renderDeckList()
+}
+
+function shuffleDeck() {
+  let shuffledDeck = []
+  for (const card in deck) {
+    let quantity = deck[card].quantity
+    while (quantity > 0) {
+      shuffledDeck.push(deck[card])
+      quantity--
+    }
+  }
+  shuffledDeck.forEach((card, index) => {
+    let randomIndex = (Math.floor(Math.random() * shuffledDeck.length))
+    let temp = card
+    let randomCard = shuffledDeck[randomIndex]
+    shuffledDeck[index] = randomCard
+    shuffledDeck[randomIndex] = temp
+  })
+
+  return shuffledDeck
 }
 
 document.querySelector('form').addEventListener('submit', () => {
