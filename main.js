@@ -1,5 +1,6 @@
 let previousSearch
 let pageSize = 50
+let deck = {}
 
 async function fetchCards(page = 1) {
   let url = `https://api.magicthegathering.io/v1/cards?pageSize=${pageSize}&page=${page}`
@@ -103,6 +104,9 @@ function renderCard(card) {
 function moreDetails(card) {
   const detailContainer = document.querySelector('#detail-container')
   detailContainer.innerHTML = ''
+  if (detailContainer.classList.contains('hidden')) {
+    toggleDeckView()
+  }
 
   // image
   const image = document.createElement('img')
@@ -156,7 +160,13 @@ function moreDetails(card) {
 }
 
 function addToDeck(card) {
-  alert('added to deck')
+  if (Object.keys(deck).includes(card.name)) {
+    deck[card.name].quantity += 1
+  } else {
+    deck[card.name] = card
+    deck[card.name].quantity = 1
+  }
+  renderDeckList()
 }
 
 function turnPage(dir) {
@@ -179,9 +189,22 @@ function toggleSearch() {
   search.classList.toggle('hidden')
 }
 
-fillSets()
-fillTypes()
+function toggleDeckView() {
+  const detailContainer = document.querySelector('#detail-container')
+  const deckContainer = document.querySelector('#deck-container')
 
+  detailContainer.classList.toggle('hidden')
+  deckContainer.classList.toggle('hidden')
+}
+
+function renderDeckList() {
+  document.querySelector('#deck-container').innerHTML = ''
+  for (const card in deck) {
+    const listing = document.createElement('div')
+    listing.textContent = `${deck[card].name} - x${deck[card].quantity}`
+    document.querySelector('#deck-container').append(listing)
+  }
+}
 
 document.querySelector('form').addEventListener('submit', () => {
   event.preventDefault()
@@ -197,3 +220,7 @@ document.querySelector('#search-form').addEventListener('click', () => {
 })
 document.querySelector('.page-btn.left').addEventListener('click', () => turnPage(-1))
 document.querySelector('.page-btn.right').addEventListener('click', () => turnPage(1))
+document.querySelector('#detail-view-btn').addEventListener('click', toggleDeckView)
+
+fillSets()
+fillTypes()

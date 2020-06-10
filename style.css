@@ -155,10 +155,19 @@ header {
   position: relative;
   flex-basis: 35vw;
   border-left: 2px solid rgba(255, 255, 255, 0.1);
+  overflow-x: hidden;
 }
 
 #detail-view-btn {
   position: absolute;
+  height: 50px;
+  top: 15px;
+  right: 15px;
+  transition: transform 0.2s ease;
+}
+
+#detail-view-btn:hover {
+  transform: scale(1.1)
 }
 
 #detail-container {
@@ -181,8 +190,8 @@ header {
   max-width: 600px;
 }
 
-#add-to-deck-btn {
-
+#deck-container {
+  /* display: none; */
 }
 
 .btn {
