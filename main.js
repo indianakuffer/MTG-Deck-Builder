@@ -95,8 +95,65 @@ function renderCard(card) {
   const cardElement = document.createElement('img')
   cardElement.classList.add('card')
   cardElement.src = card.imageUrl
+  cardElement.addEventListener('click', () => { moreDetails(card) })
 
   document.querySelector('#card-container').append(cardElement)
+}
+
+function moreDetails(card) {
+  const detailContainer = document.querySelector('#detail-container')
+  detailContainer.innerHTML = ''
+
+  // image
+  const image = document.createElement('img')
+  image.src = card.imageUrl
+  image.classList.add('detail-card')
+
+  // info
+  const info = document.createElement('div')
+
+  // name
+  const name = document.createElement('p')
+  name.textContent = `Name: ${card.name}`
+
+  // originalType
+  const originalType = document.createElement('p')
+  originalType.textContent = `Type: ${card.originalType}`
+
+  // originalText
+  const originalText = document.createElement('p')
+  originalText.textContent = `Text: ${card.originalText}`
+
+  // rarity
+  const rarity = document.createElement('p')
+  rarity.textContent = `Rarity: ${card.rarity}`
+
+  // setName
+  const setName = document.createElement('p')
+  setName.textContent = `Set: ${card.setName}`
+
+  // artist
+  const artist = document.createElement('p')
+  artist.textContent = `Artist: ${card.artist}`
+
+  // button
+  const button = document.createElement('button')
+  button.textContent = 'Add to Deck'
+  button.addEventListener('click', () => { addToDeck(card) })
+
+  detailContainer.append(image)
+  detailContainer.append(info)
+  info.append(name)
+  info.append(originalType)
+  info.append(originalText)
+  info.append(rarity)
+  info.append(setName)
+  info.append(artist)
+  detailContainer.append(button)
+}
+
+function addToDeck(card) {
+  alert('added to deck')
 }
 
 function turnPage(dir) {
