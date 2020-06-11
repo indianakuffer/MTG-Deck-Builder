@@ -475,8 +475,13 @@ https://mkrtchyan.ga
   #detail-panel {
     order: 1;
     flex-basis: unset;
-    border-right: none;
+    border-left: none;
     border-top: 2px solid rgba(255, 255, 255, 0.1);
+  }
+
+  #detail-panel h1 {
+    position: unset;
+    margin: 0 0 5px 0;
   }
 
   .info-container p {
