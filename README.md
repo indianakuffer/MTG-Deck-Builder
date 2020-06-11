@@ -325,9 +325,9 @@ MTG Deck Builder is a tool for users to search a database of all the Magic: The 
 |---|---| ---|
 |June 8| Project Prompt | Complete
 |June 9| Core Application Structure / Build and Test Search Form / Page Buttons | Complete
-|June 10| Details Pane Rendering / Advanced Styling / MVP  | Incomplete
-|June 11| *Deck Storage* / *Deck Panel and Rendering* / *Deck Shuffling*  | Incomplete
-|June 12| *Test Hand Button & View* / *Advanced Styling* | Incomplete
+|June 10| Details Pane Rendering / Advanced Styling / MVP  | Complete
+|June 11| *Deck Storage* / *Deck Panel and Rendering* / *Deck Shuffling*  | Complete
+|June 12| *Test Hand Button & View* / *Advanced Styling* | Complete
 |June 15| Present | Incomplete
 
 ## Priority Matrix
@@ -347,7 +347,7 @@ MTG Deck Builder is a tool for users to search a database of all the Magic: The 
 | *Deck View Panel & Button* | H | 1.5hrs| .5hrs | .5hrs |
 | *Deck Object & Refreshing* | H | 1.5hrs| 1hrs | 1hrs |
 | *Deck Shuffling & Test Hand Display* | M | 1.5hrs| 2hrs | 2hrs |
-| *Advanced CSS and Styling* | M | 4hrs| n/a | n/a |
+| *Advanced CSS and Styling* | M | 4hrs| 3hrs | 3hrs |
 | *Tweaks, QOL* | L | 2hrs| n/a | n/a |
 | Total | H | 21hrs| n/a | n/a |
 
