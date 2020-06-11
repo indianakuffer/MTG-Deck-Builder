@@ -16,8 +16,8 @@
       <header>
         <h1>MTG Deck Builder</h1>
         <div id='search-bar'>
-          <div id='search-icn'></div>
-          <div id='search-text'>search</div>
+          <img id='search-icn' src='./images/search-icon.png'></img>
+          <div id='search-text'>search...</div>
         </div>
         <div id='search-form-container' class='hidden'>
           <form id='search-form'>
@@ -74,14 +74,16 @@
           </form>
         </div>
       </header>
-      <div id='card-container'></div>
+      <div id='card-container'>
+        <div id='starter-text'>Search to get started.</div>
+      </div>
       <div id='page-btn-container'>
         <div class='page-btn left'>Prev</div>
         <div class='page-btn right'>Next</div>
       </div>
     </div>
     <div id='detail-panel'>
-      <img id='detail-view-btn' src='./images/deck-icon.png'></img>
+      <div id='detail-view-btn'></div>
       <div id='detail-container'></div>
       <div id='deck-container' class='hidden'>
         <h1>Deck</h1>

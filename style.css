@@ -35,32 +35,30 @@ header {
 #search-bar {
   display: flex;
   flex-flow: row;
+  justify-content: space-between;
   background-color: white;
-  color: #3f3f3f;
+  color: #717171;
   border-radius: 15px;
-  width: 180px;
+  width: 40px;
   height: 40px;
   align-items: center;
-  transition: transform 0.1s ease;
+  transition: transform 0.1s ease, width 0.4s ease;
+  overflow-x: hidden;
 }
 
 #search-bar:hover {
   cursor: pointer;
-  transform: scale(1.05)
+  width: 180px;
 }
 
 #search-icn {
-  flex-basis: 20%;
-  margin-left: 20px;
+  margin-left: 10px;
   width: 20px;
   height: 20px;
-  background-image: url(./images/search-icon.png);
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 
 #search-text {
-  margin-left: 10px;
+  margin: 0 50px 0 20px;
 }
 
 #search-form-container {
@@ -72,9 +70,12 @@ header {
   left: 0px;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
-  transition: opacity 0.4s ease, max-height 1s ease;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.4s ease;
   z-index: 999;
+  /* backdrop-filter not compatible with firefox */
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 #search-form {
@@ -100,6 +101,12 @@ header {
   font-size: 16px;
 }
 
+#search-form input[type='text'] {
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  padding: 5px;
+}
+
 #search-form select {
   font-size: 14px;
 }
@@ -116,6 +123,12 @@ header {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
+}
+
+#starter-text {
+  align-self: center;
+  opacity: 0.7;
+  font-size: 22px;
 }
 
 .card {
@@ -159,10 +172,17 @@ header {
 
 #detail-view-btn {
   position: absolute;
-  height: 50px;
-  top: 15px;
-  right: 15px;
+  height: 40px;
+  width: 40px;
+  background-image: url(./images/deck-icon-black.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 85%;
+  top: 25px;
+  right: 25px;
   transition: transform 0.2s ease;
+  background-color: white;
+  border-radius: 13px;
 }
 
 #detail-view-btn:hover {
@@ -179,6 +199,10 @@ header {
   box-sizing: border-box;
 }
 
+#detail-container.hidden {
+  display: none;
+}
+
 .detail-card {
   width: 60%;
   max-width: 400px;
@@ -190,17 +214,53 @@ header {
 }
 
 #deck-container {
+  padding: 0px 20px;
 }
 
 #deck {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .listing {
+  color: black;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
 
+.listing:nth-child(even) {
+  background-color: lightgrey;
+}
+
+.crement-btn {
+  position: relative;
+  border: 1px solid transparent;
+  margin: 0px 5px;
+  border-radius: 4px;
+  vertical-align: text-top;
+  padding: 0px 8px;
+  color: white;
+  font-size: 16px;
+}
+
+.crement-btn:hover {
+  transform: scale(1.1)
+}
+
+.crement-remove {
+  background-color: #df2e2e;
+}
+
+.crement-add {
+  background-color: #3591c6;
 }
 
 #test-hand-btn {
   width: 100px;
+  margin: 15px auto;
+  text-align: center;
 }
 
 #test-hand-container {
@@ -212,20 +272,31 @@ header {
   left: 0px;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
-  transition: opacity 0.4s ease, max-height 1s ease;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.4s ease;
   z-index: 999;
+    /* backdrop filter not compatible with firefox */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 #test-hand {
   position: relative;
   display: flex;
-  flex-flow: column;
+  flex-flow: row wrap;
+  justify-content: space-around;
   border-radius: 10px;
   background-color: white;
   color: black;
   padding: 20px;
+  width: 90vw;
+  max-height: 80vh;
   z-index: 9999;
+}
+
+#test-hand img {
+  border-radius: 12px;
+  margin: 5px;
 }
 
 .btn {
@@ -233,7 +304,7 @@ header {
   border-radius: 8px;
   padding: 5px 20px;
   font-size: 18px;
-  background-color: #c63535;
+  background-color: #3591c6;
   color: white;
   transition: transform 0.2s ease;
 }
@@ -324,7 +395,7 @@ https://mkrtchyan.ga
 }
 
 .clouds{
-  background: transparent url(http://www.script-tutorials.com/demos/360/images/clouds3.png) repeat top center;
+  background: transparent url(./images/clouds.png) repeat top center;
   z-index: -99;
 
   -moz-animation: move-clouds-back 200s linear infinite;

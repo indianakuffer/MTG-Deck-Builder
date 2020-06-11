@@ -193,7 +193,7 @@ function toggleDeckView() {
 
   detailContainer.classList.toggle('hidden')
   deckContainer.classList.toggle('hidden')
-  detailContainer.classList.contains('hidden') ? iconImage.src = './images/card-icon.png' : iconImage.src = './images/deck-icon.png'
+  detailContainer.classList.contains('hidden') ? iconImage.style['background-image'] = 'url(./images/card-icon-black.png)' : iconImage.style['background-image'] = 'url(./images/deck-icon-black.png)'
 }
 
 function renderDeckList() {
@@ -203,17 +203,32 @@ function renderDeckList() {
     listing.textContent = `${deck[card].name} - x${deck[card].quantity}`
     listing.classList.add('listing')
 
-    const removeButton = document.createElement('span')
-    removeButton.innerText = 'remove'
-    removeButton.addEventListener('click', () => removeCard(card))
+    const buttonContainer = document.createElement('div')
+    buttonContainer.classList.add('crement-btn.container')
+
+    const removeButton = document.createElement('button')
+    removeButton.innerText = '-'
+    removeButton.addEventListener('click', () => crementCard(card, -1))
+    removeButton.classList.add('crement-btn')
+    removeButton.classList.add('crement-remove')
+
+    const addButton = document.createElement('button')
+    addButton.innerText = '+'
+    addButton.addEventListener('click', () => crementCard(card, 1))
+    addButton.classList.add('crement-btn')
+    addButton.classList.add('crement-add')
 
     document.querySelector('#deck').append(listing)
-    listing.append(removeButton)
+    listing.append(buttonContainer)
+    buttonContainer.append(removeButton)
+    buttonContainer.append(addButton)
   }
 }
 
-function removeCard(card) {
-  deck[card].quantity -= 1
+
+
+function crementCard(card, amount) {
+  deck[card].quantity += amount
   if (deck[card].quantity <= 0) {
     delete deck[card]
   }
@@ -254,6 +269,7 @@ function testHand() {
     image.src = card.imageUrl
     handContainer.append(image)
   })
+  if (shuffledDeck.length < 7) { alert('Warning: You have less than 7 cards in your deck!') }
   toggleHidden(document.querySelector('#test-hand-container'))
 }
 
