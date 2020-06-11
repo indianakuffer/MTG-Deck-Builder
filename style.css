@@ -3,11 +3,13 @@ html, body {
   height: 100%;
   overflow-x: hidden;
   margin: 0px;
+  padding: 0px;
   font-family: Raleway, Helvetica, sans-serif;
 }
 
 body {
   color: white;
+  background-color: black;
 }
 
 h1 {
@@ -481,11 +483,20 @@ https://mkrtchyan.ga
 
   #detail-panel h1 {
     position: unset;
-    margin: 0 0 5px 0;
+    margin: 25px 0 15px 0;
   }
 
   .info-container p {
     font-size: 12px;
     margin: 3px 0px;
+  }
+
+  #test-hand {
+    overflow-y: auto;
+    max-width: 80vw;
+  }
+
+  #test-hand img {
+    width: 45%;
   }
 }
