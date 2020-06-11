@@ -141,6 +141,7 @@ header {
 
 .card {
   margin: 15px;
+  max-height: 100%;
   border-radius: 14px;
   flex-basis: 250px;
   transition: transform 0.2s ease;
@@ -191,7 +192,7 @@ transform: translateY(1px);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 75%;
-  top: 25px;
+  top: 20px;
   right: 25px;
   transition: transform 0.2s ease;
   background-color: white;
@@ -208,7 +209,7 @@ transform: translateY(1px);
   flex-flow: column;
   justify-content: space-around;
   align-items: center;
-  padding: 20px;
+  padding: 0px 20px;
   height: 100%;
   box-sizing: border-box;
 }
@@ -341,6 +342,7 @@ transform: translateY(1px);
   border: 2px solid transparent;
   border-radius: 8px;
   padding: 5px 20px;
+  margin: 10px;
   font-size: 18px;
   background-color: #3591c6;
   color: white;
@@ -459,11 +461,12 @@ https://mkrtchyan.ga
 
   #main-container {
     flex-flow: column;
-    height: auto;
+    /* height: auto; */
   }
 
   #card-panel {
     flex-basis: 40vh;
+    max-height: 40vh;
   }
 
   #search-form {
@@ -486,6 +489,10 @@ https://mkrtchyan.ga
     margin: 25px 0 15px 0;
   }
 
+  .info-container {
+    max-width: 80%;
+
+  }
   .info-container p {
     font-size: 12px;
     margin: 3px 0px;
