@@ -7,9 +7,11 @@ async function fetchCards(page = 1) {
   url += buildQueries()
   // clears card-container on reload
   document.querySelector('#card-container').innerHTML = ''
+  let interval = createLoading()
   try {
     const response = await axios.get(url)
     const cardList = response.data.cards
+    removeLoading(interval)
     console.log(cardList)
     if (cardList.length === 0) { alert('Sorry, that returned no results.') }
     cardList.forEach((card) => {
@@ -103,7 +105,12 @@ function renderCard(card) {
 
 function moreDetails(card) {
   const detailContainer = document.querySelector('#detail-container')
-  detailContainer.innerHTML = ''
+
+  while (detailContainer.childNodes.length > 2) {
+    console.log(detailContainer.childNodes.length)
+    console.log(detailContainer.lastChild)
+    detailContainer.removeChild(detailContainer.lastChild)
+  }
   if (detailContainer.classList.contains('hidden')) {
     toggleDeckView()
   }
@@ -198,6 +205,7 @@ function toggleDeckView() {
 
 function renderDeckList() {
   document.querySelector('#deck').innerHTML = ''
+  document.querySelector('#deck-length').innerText = deckLength()
   for (const card in deck) {
     const listing = document.createElement('div')
     listing.textContent = `${deck[card].name} - x${deck[card].quantity}`
@@ -225,14 +233,20 @@ function renderDeckList() {
   }
 }
 
-
-
 function crementCard(card, amount) {
   deck[card].quantity += amount
   if (deck[card].quantity <= 0) {
     delete deck[card]
   }
   renderDeckList()
+}
+
+function deckLength() {
+  let length = 0
+  for (const card in deck) {
+    length += deck[card].quantity
+  }
+  return length
 }
 
 function shuffleDeck() {
@@ -271,6 +285,32 @@ function testHand() {
   })
   if (shuffledDeck.length < 7) { alert('Warning: You have less than 7 cards in your deck!') }
   toggleHidden(document.querySelector('#test-hand-container'))
+}
+
+function createLoading() {
+  const loading = document.createElement('div')
+  loading.id = 'loading'
+  loading.classList.add('starter-text')
+  loading.innerHTML = `loading<span id='loading-dots'.></span>`
+
+  const cardContainer = document.querySelector('#card-container')
+  cardContainer.appendChild(loading)
+
+  return loadingDots()
+}
+
+function loadingDots() {
+  const dots = document.querySelector('#loading-dots')
+  let interval = setInterval(() => {
+    dots.innerText.length >= 3 ? dots.innerText = '' : null
+    dots.innerText += '.'
+  }, 500)
+  return interval
+}
+
+function removeLoading(interval) {
+  clearInterval(interval)
+  document.querySelector('#loading').remove()
 }
 
 document.querySelector('form').addEventListener('submit', () => {

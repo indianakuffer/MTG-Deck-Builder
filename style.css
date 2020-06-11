@@ -3,7 +3,7 @@ html, body {
   height: 100%;
   overflow-x: hidden;
   margin: 0px;
-  font-family: Raleway, Arial, Helvetica, sans-serif;
+  font-family: Raleway, Helvetica, sans-serif;
 }
 
 body {
@@ -117,7 +117,7 @@ header {
 
 #search-btn {
   margin: 40px 0 5px 0;
-  align-self: center;
+  align-self: center; 
   letter-spacing: 1px;
 }
 
@@ -129,7 +129,7 @@ header {
   justify-content: space-around;
 }
 
-#starter-text {
+.starter-text {
   align-self: center;
   opacity: 0.7;
   font-size: 22px;
@@ -185,7 +185,7 @@ transform: translateY(1px);
   background-image: url(./images/deck-icon-black.png);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 85%;
+  background-size: 75%;
   top: 25px;
   right: 25px;
   transition: transform 0.2s ease;
@@ -212,6 +212,11 @@ transform: translateY(1px);
   display: none;
 }
 
+#detail-container h1 {
+  position: absolute;
+  top: 0;
+}
+
 .detail-card {
   width: 60%;
   max-width: 400px;
@@ -224,6 +229,10 @@ transform: translateY(1px);
 
 #deck-container {
   padding: 0px 20px;
+}
+
+#deck-container h1 {
+  text-align: center;
 }
 
 #deck {
@@ -419,7 +428,7 @@ https://mkrtchyan.ga
 }
 
 .clouds{
-  background: transparent url(./images/clouds.png) repeat top center;
+  background: transparent url(./images/clouds.png) repeat-x top center;
   z-index: -99;
 
   -moz-animation: move-clouds-back 200s linear infinite;
