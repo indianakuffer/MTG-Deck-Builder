@@ -370,16 +370,11 @@ function logLocalStorage() {
 }
 
 function loadDeck() {
-
+  const loadedDeck = JSON.parse(localStorage['myDeck'])
+  deck.contents = loadedDeck
+  renderDeckList()
 }
 
 function saveDeck() {
-  localStorage
+  localStorage.setItem(deck.name, JSON.stringify(deck.contents))
 }
-
-// localStorage.setItem('deck', 'Tom')
-// localStorage.setItem('deck2', 'Jerry')
-
-// localStorage.clear()
-
-logLocalStorage()
