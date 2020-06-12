@@ -107,8 +107,6 @@ function moreDetails(card) {
   const detailContainer = document.querySelector('#detail-container')
 
   while (detailContainer.childNodes.length > 2) {
-    console.log(detailContainer.childNodes.length)
-    console.log(detailContainer.lastChild)
     detailContainer.removeChild(detailContainer.lastChild)
   }
   if (detailContainer.classList.contains('hidden')) {
@@ -204,6 +202,7 @@ function toggleDeckView() {
 }
 
 function renderDeckList() {
+  const testHandButton = document.querySelector('#test-hand-btn')
   document.querySelector('#deck').innerHTML = ''
   document.querySelector('#deck-length').innerText = deckLength()
   for (const card in deck) {
@@ -230,6 +229,12 @@ function renderDeckList() {
     listing.append(buttonContainer)
     buttonContainer.append(removeButton)
     buttonContainer.append(addButton)
+  }
+
+  if (Object.keys(deck).length > 0 && testHandButton.classList.contains('hidden')) {
+    testHandButton.classList.remove('hidden')
+  } else if (Object.keys(deck).length <= 0) {
+    testHandButton.classList.add('hidden')
   }
 }
 

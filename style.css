@@ -471,6 +471,7 @@ https://mkrtchyan.ga
   #card-panel {
     flex-basis: 40vh;
     max-height: 40vh;
+    min-height: 40vh;
   }
 
   #search-form {
