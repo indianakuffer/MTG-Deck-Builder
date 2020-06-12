@@ -1,6 +1,9 @@
 let previousSearch
 let pageSize = 50
-let deck = {}
+let deck = {
+  name: 'myDeck',
+  contents: {},
+}
 
 // Kicking things off
 initEventListeners()
@@ -166,11 +169,11 @@ function toggleDeckView() {
 }
 
 function addToDeck(card) {
-  if (Object.keys(deck).includes(card.name)) {
-    deck[card.name].quantity += 1
+  if (Object.keys(deck.contents).includes(card.name)) {
+    deck.contents[card.name].quantity += 1
   } else {
-    deck[card.name] = card
-    deck[card.name].quantity = 1
+    deck.contents[card.name] = card
+    deck.contents[card.name].quantity = 1
   }
   renderDeckList()
 }
@@ -179,13 +182,13 @@ function renderDeckList() {
   const testHandButton = document.querySelector('#test-hand-btn')
   document.querySelector('#deck').innerHTML = ''
   document.querySelector('#deck-length').textContent = deckLength()
-  for (const card in deck) {
+  for (const card in deck.contents) {
     const listing = document.createElement('div')
     listing.classList.add('listing')
 
     const text = document.createElement('span')
     text.classList.add('listing-name')
-    text.textContent = `${deck[card].name} - x${deck[card].quantity}`
+    text.textContent = `${deck.contents[card].name} - x${deck.contents[card].quantity}`
 
     const buttonContainer = document.createElement('div')
     buttonContainer.classList.add('crement-btn.container')
@@ -203,7 +206,7 @@ function renderDeckList() {
     addButton.classList.add('crement-add')
 
     const preview = document.createElement('img')
-    preview.src = deck[card].imageUrl
+    preview.src = deck.contents[card].imageUrl
     preview.classList.add('card-preview')
 
     document.querySelector('#deck').append(listing)
@@ -214,7 +217,7 @@ function renderDeckList() {
     text.append(preview)
   }
 
-  if (Object.keys(deck).length > 0 && testHandButton.classList.contains('hidden')) {
+  if (Object.keys(deck.contents).length > 0 && testHandButton.classList.contains('hidden')) {
     testHandButton.classList.remove('hidden')
   } else if (Object.keys(deck).length <= 0) {
     testHandButton.classList.add('hidden')
@@ -222,27 +225,27 @@ function renderDeckList() {
 }
 
 function crementCard(card, amount) {
-  deck[card].quantity += amount
-  if (deck[card].quantity <= 0) {
-    delete deck[card]
+  deck.contents[card].quantity += amount
+  if (deck.contents[card].quantity <= 0) {
+    delete deck.contents[card]
   }
   renderDeckList()
 }
 
 function deckLength() {
   let length = 0
-  for (const card in deck) {
-    length += deck[card].quantity
+  for (const card in deck.contents) {
+    length += deck.contents[card].quantity
   }
   return length
 }
 
 function shuffleDeck() {
   let shuffledDeck = []
-  for (const card in deck) {
-    let quantity = deck[card].quantity
+  for (const card in deck.contents) {
+    let quantity = deck.contents[card].quantity
     while (quantity > 0) {
-      shuffledDeck.push(deck[card])
+      shuffledDeck.push(deck.contents[card])
       quantity--
     }
   }
@@ -358,3 +361,25 @@ function initEventListeners() {
   document.querySelector('#detail-view-btn').addEventListener('click', toggleDeckView)
   document.querySelector('#test-hand-btn').addEventListener('click', testHand)
 }
+
+function logLocalStorage() {
+  const localKeys = Object.keys(localStorage)
+  localKeys.forEach(key => {
+    console.log(key, localStorage[key])
+  })
+}
+
+function loadDeck() {
+
+}
+
+function saveDeck() {
+  localStorage
+}
+
+// localStorage.setItem('deck', 'Tom')
+// localStorage.setItem('deck2', 'Jerry')
+
+// localStorage.clear()
+
+logLocalStorage()
