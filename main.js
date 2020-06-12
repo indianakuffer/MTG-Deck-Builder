@@ -218,7 +218,7 @@ function renderDeckList() {
     text.append(preview)
   }
 
-  saveDeck()
+  saveDeck(deck.name)
 
   if (Object.keys(deck.contents).length > 0 && testHandButton.classList.contains('hidden')) {
     testHandButton.classList.remove('hidden')
@@ -372,17 +372,18 @@ function logLocalStorage() {
   })
 }
 
-function loadDeck() {
+function loadDeck(deckName = Object.keys(localStorage)[0]) {
   try {
-    const loadedDeck = JSON.parse(localStorage['myDeck'])
+    const loadedDeck = JSON.parse(localStorage[deckName])
     deck.contents = loadedDeck
+    deck.name = deckName
     renderDeckList()
   } catch (error) {
-    console.error('localStorage deck not found')
+    console.error(`localStorage deck '${deckName}' not found`)
     return
   }
 }
 
-function saveDeck() {
-  localStorage.setItem(deck.name, JSON.stringify(deck.contents))
+function saveDeck(deckName) {
+  localStorage.setItem(deckName, JSON.stringify(deck.contents))
 }
