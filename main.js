@@ -2,6 +2,11 @@ let previousSearch
 let pageSize = 50
 let deck = {}
 
+// Kicking things off
+initEventListeners()
+fillSets()
+fillTypes()
+
 async function fetchCards(page = 1) {
   let url = `https://api.magicthegathering.io/v1/cards?pageSize=${pageSize}&page=${page}`
   url += buildQueries()
@@ -22,9 +27,7 @@ async function fetchCards(page = 1) {
     console.error(error)
   }
   previousSearch = url
-  console.log('Previous Search', previousSearch)
 }
-
 
 function buildQueries() {
   let queryList = []
@@ -59,36 +62,6 @@ function buildQueries() {
 
   let parsedQueries = queryList.join('')
   return parsedQueries
-}
-
-async function fillSets() {
-  try {
-    const response = await axios.get('https://api.magicthegathering.io/v1/sets')
-    const dropdown = document.querySelector('#input-sets')
-    response.data.sets.forEach(set => {
-      const newOption = document.createElement('option')
-      newOption.innerText = set.name
-      newOption.value = set.name
-      dropdown.append(newOption)
-    })
-  } catch (error) {
-    console.error(error)
-  }
-}
-
-async function fillTypes() {
-  try {
-    const response = await axios.get('https://api.magicthegathering.io/v1/types')
-    const dropdown = document.querySelector('#input-types')
-    response.data.types.forEach(type => {
-      const newOption = document.createElement('option')
-      newOption.innerText = type
-      newOption.value = type
-      dropdown.append(newOption)
-    })
-  } catch (error) {
-    console.error(error)
-  }
 }
 
 function renderCard(card) {
@@ -204,7 +177,7 @@ function toggleDeckView() {
 function renderDeckList() {
   const testHandButton = document.querySelector('#test-hand-btn')
   document.querySelector('#deck').innerHTML = ''
-  document.querySelector('#deck-length').innerText = deckLength()
+  document.querySelector('#deck-length').textContent = deckLength()
   for (const card in deck) {
     const listing = document.createElement('div')
     listing.textContent = `${deck[card].name} - x${deck[card].quantity}`
@@ -214,13 +187,13 @@ function renderDeckList() {
     buttonContainer.classList.add('crement-btn.container')
 
     const removeButton = document.createElement('button')
-    removeButton.innerText = '-'
+    removeButton.textContent = '-'
     removeButton.addEventListener('click', () => crementCard(card, -1))
     removeButton.classList.add('crement-btn')
     removeButton.classList.add('crement-remove')
 
     const addButton = document.createElement('button')
-    addButton.innerText = '+'
+    addButton.textContent = '+'
     addButton.addEventListener('click', () => crementCard(card, 1))
     addButton.classList.add('crement-btn')
     addButton.classList.add('crement-add')
@@ -307,8 +280,8 @@ function createLoading() {
 function loadingDots() {
   const dots = document.querySelector('#loading-dots')
   let interval = setInterval(() => {
-    dots.innerText.length >= 3 ? dots.innerText = '' : null
-    dots.innerText += '.'
+    dots.textContent.length >= 3 ? dots.textContent = '' : null
+    dots.textContent += '.'
   }, 500)
   return interval
 }
@@ -318,27 +291,56 @@ function removeLoading(interval) {
   document.querySelector('#loading').remove()
 }
 
-document.querySelector('form').addEventListener('submit', () => {
-  event.preventDefault()
-  fetchCards()
-  toggleHidden(document.querySelector('#search-form-container'))
-})
+async function fillSets() {
+  try {
+    const response = await axios.get('https://api.magicthegathering.io/v1/sets')
+    const dropdown = document.querySelector('#input-sets')
+    response.data.sets.forEach(set => {
+      const newOption = document.createElement('option')
+      newOption.textContent = set.name
+      newOption.value = set.name
+      dropdown.append(newOption)
+    })
+  } catch (error) {
+    console.error(error)
+  }
+}
 
-document.querySelector('#search-bar').addEventListener('click', () => { toggleHidden(document.querySelector('#search-form-container')) })
-document.querySelector('#search-form-container').addEventListener('click', () => { toggleHidden(document.querySelector('#search-form-container')) })
-// stopPropogation needed to allow users to click from without hiding the overlay
-document.querySelector('#search-form').addEventListener('click', () => {
-  event.stopPropagation()
-})
-document.querySelector('#test-hand-container').addEventListener('click', () => toggleHidden(document.querySelector('#test-hand-container')))
-// stopPropogation needed to allow users to click from without hiding the overlay
-document.querySelector('#test-hand').addEventListener('click', () => {
-  event.stopPropagation()
-})
-document.querySelector('.page-btn.left').addEventListener('click', () => turnPage(-1))
-document.querySelector('.page-btn.right').addEventListener('click', () => turnPage(1))
-document.querySelector('#detail-view-btn').addEventListener('click', toggleDeckView)
-document.querySelector('#test-hand-btn').addEventListener('click', testHand)
+async function fillTypes() {
+  try {
+    const response = await axios.get('https://api.magicthegathering.io/v1/types')
+    const dropdown = document.querySelector('#input-types')
+    response.data.types.forEach(type => {
+      const newOption = document.createElement('option')
+      newOption.textContent = type
+      newOption.value = type
+      dropdown.append(newOption)
+    })
+  } catch (error) {
+    console.error(error)
+  }
+}
 
-fillSets()
-fillTypes()
+function initEventListeners() {
+  const searchFormContainer = document.querySelector('#search-form-container')
+  const testHandContainer = document.querySelector('#test-hand-container')
+
+  document.querySelector('form').addEventListener('submit', () => {
+    event.preventDefault()
+    fetchCards()
+    toggleHidden(searchFormContainer)
+  })
+  document.querySelector('#search-bar').addEventListener('click', () => { toggleHidden(searchFormContainer) })
+  searchFormContainer.addEventListener('click', () => { toggleHidden(searchFormContainer) })
+  document.querySelector('#search-form').addEventListener('click', () => {
+    event.stopPropagation()
+  })
+  testHandContainer.addEventListener('click', () => toggleHidden(testHandContainer))
+  document.querySelector('#test-hand').addEventListener('click', () => {
+    event.stopPropagation()
+  })
+  document.querySelector('.page-btn.left').addEventListener('click', () => turnPage(-1))
+  document.querySelector('.page-btn.right').addEventListener('click', () => turnPage(1))
+  document.querySelector('#detail-view-btn').addEventListener('click', toggleDeckView)
+  document.querySelector('#test-hand-btn').addEventListener('click', testHand)
+}
