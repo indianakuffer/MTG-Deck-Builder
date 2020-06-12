@@ -7,27 +7,7 @@ initEventListeners()
 fillSets()
 fillTypes()
 
-async function fetchCards(page = 1) {
-  let url = `https://api.magicthegathering.io/v1/cards?pageSize=${pageSize}&page=${page}`
-  url += buildQueries()
-  // clears card-container on reload
-  document.querySelector('#card-container').innerHTML = ''
-  let interval = createLoading()
-  try {
-    const response = await axios.get(url)
-    const cardList = response.data.cards
-    removeLoading(interval)
-    console.log(cardList)
-    if (cardList.length === 0) { alert('Sorry, that returned no results.') }
-    cardList.forEach((card) => {
-      renderCard(card)
-    })
-
-  } catch (error) {
-    console.error(error)
-  }
-  previousSearch = url
-}
+// Functions
 
 function buildQueries() {
   let queryList = []
@@ -64,6 +44,28 @@ function buildQueries() {
   return parsedQueries
 }
 
+async function fetchCards(page = 1) {
+  let url = `https://api.magicthegathering.io/v1/cards?pageSize=${pageSize}&page=${page}`
+  url += buildQueries()
+  // clears card-container on reload
+  document.querySelector('#card-container').innerHTML = ''
+  let interval = createLoading()
+  try {
+    const response = await axios.get(url)
+    const cardList = response.data.cards
+    removeLoading(interval)
+    console.log(cardList)
+    if (cardList.length === 0) { alert('Sorry, that returned no results.') }
+    cardList.forEach((card) => {
+      renderCard(card)
+    })
+
+  } catch (error) {
+    console.error(error)
+  }
+  previousSearch = url
+}
+
 function renderCard(card) {
   // cards with no imageUrls seem to be duplicates, skips over those
   if (!card.imageUrl) { return }
@@ -74,6 +76,19 @@ function renderCard(card) {
   cardElement.addEventListener('click', () => { moreDetails(card) })
 
   document.querySelector('#card-container').append(cardElement)
+}
+
+function turnPage(dir) {
+  const pageLocation = previousSearch.indexOf('page=')
+  let pageString = previousSearch.substring(pageLocation, pageLocation + 6)
+  let pageNum = parseInt(pageString[pageString.length - 1])
+
+  // stops page from going below 0
+  if (pageNum + dir === 0) {
+    console.warn('Page cannot go below 0.')
+    return
+  }
+  fetchCards(pageNum + dir)
 }
 
 function moreDetails(card) {
@@ -145,23 +160,6 @@ function addToDeck(card) {
     deck[card.name].quantity = 1
   }
   renderDeckList()
-}
-
-function turnPage(dir) {
-  const pageLocation = previousSearch.indexOf('page=')
-  let pageString = previousSearch.substring(pageLocation, pageLocation + 6)
-  let pageNum = parseInt(pageString[pageString.length - 1])
-
-  // stops page from going below 0
-  if (pageNum + dir === 0) {
-    console.warn('Page cannot go below 0.')
-    return
-  }
-  fetchCards(pageNum + dir)
-}
-
-function toggleHidden(element) {
-  element.classList.toggle('hidden')
 }
 
 function toggleDeckView() {
@@ -319,6 +317,10 @@ async function fillTypes() {
   } catch (error) {
     console.error(error)
   }
+}
+
+function toggleHidden(element) {
+  element.classList.toggle('hidden')
 }
 
 function initEventListeners() {
