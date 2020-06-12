@@ -347,9 +347,10 @@ MTG Deck Builder is a tool for users to search a database of all the Magic: The 
 | *Deck View Panel & Button* | H | 1.5hrs| .5hrs | .5hrs |
 | *Deck Object & Refreshing* | H | 1.5hrs| 1hrs | 1hrs |
 | *Deck Shuffling & Test Hand Display* | M | 1.5hrs| 2hrs | 2hrs |
-| *Advanced CSS and Styling* | M | 4hrs| 5hrs | 5hrs |
-| *Tweaks, QOL* | L | 2hrs| 1hrs | 1hrs |
-| Total | H | 21hrs| n/a | n/a |
+| *Advanced CSS and Styling* | M | 4hrs| 6hrs | 6hrs |
+| *Tweaks, QOL* | L | 2hrs| 5hrs | 5hrs |
+| *Post Post MVP Features* | L | 3hrs| 4hrs | 4hrs |
+| Total | H | 21hrs| 28.75hrs | 28.75hrs |
 
 ## Code Snippet
 
