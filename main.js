@@ -152,16 +152,6 @@ function moreDetails(card) {
   detailContainer.append(button)
 }
 
-function addToDeck(card) {
-  if (Object.keys(deck).includes(card.name)) {
-    deck[card.name].quantity += 1
-  } else {
-    deck[card.name] = card
-    deck[card.name].quantity = 1
-  }
-  renderDeckList()
-}
-
 function toggleDeckView() {
   const detailContainer = document.querySelector('#detail-container')
   const deckContainer = document.querySelector('#deck-container')
@@ -172,14 +162,27 @@ function toggleDeckView() {
   detailContainer.classList.contains('hidden') ? iconImage.style['background-image'] = 'url(./images/card-icon-black.png)' : iconImage.style['background-image'] = 'url(./images/deck-icon-black.png)'
 }
 
+function addToDeck(card) {
+  if (Object.keys(deck).includes(card.name)) {
+    deck[card.name].quantity += 1
+  } else {
+    deck[card.name] = card
+    deck[card.name].quantity = 1
+  }
+  renderDeckList()
+}
+
 function renderDeckList() {
   const testHandButton = document.querySelector('#test-hand-btn')
   document.querySelector('#deck').innerHTML = ''
   document.querySelector('#deck-length').textContent = deckLength()
   for (const card in deck) {
     const listing = document.createElement('div')
-    listing.textContent = `${deck[card].name} - x${deck[card].quantity}`
     listing.classList.add('listing')
+
+    const text = document.createElement('span')
+    text.classList.add('listing-name')
+    text.textContent = `${deck[card].name} - x${deck[card].quantity}`
 
     const buttonContainer = document.createElement('div')
     buttonContainer.classList.add('crement-btn.container')
@@ -196,10 +199,16 @@ function renderDeckList() {
     addButton.classList.add('crement-btn')
     addButton.classList.add('crement-add')
 
+    const preview = document.createElement('img')
+    preview.src = deck[card].imageUrl
+    preview.classList.add('card-preview')
+
     document.querySelector('#deck').append(listing)
+    listing.append(text)
     listing.append(buttonContainer)
     buttonContainer.append(removeButton)
     buttonContainer.append(addButton)
+    text.append(preview)
   }
 
   if (Object.keys(deck).length > 0 && testHandButton.classList.contains('hidden')) {

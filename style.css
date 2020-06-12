@@ -245,6 +245,8 @@ transform: translateY(1px);
   background-color: white;
   border-radius: 10px;
   overflow: hidden;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .listing {
@@ -292,6 +294,19 @@ transform: translateY(1px);
   color: #3591c6;
   border-color: #3591c6;
   background-color: white;
+}
+
+.card-preview {
+  display: none;
+  position: absolute;
+  z-index: 999;
+  border-radius: 14px;
+  right: 0px;
+  transform: translateY(-50px);
+}
+
+.listing-name:hover .card-preview {
+  display: unset;
 }
 
 #test-hand-btn {
