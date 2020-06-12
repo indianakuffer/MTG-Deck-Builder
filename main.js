@@ -79,15 +79,18 @@ function renderCard(card) {
 }
 
 function turnPage(dir) {
+  if (!previousSearch) {
+    alert('Make a search first!')
+    return
+  }
+  if (pageNum + dir === 0) {
+    alert('You\'re at the first page.')
+    return
+  }
   const pageLocation = previousSearch.indexOf('page=')
   let pageString = previousSearch.substring(pageLocation, pageLocation + 6)
   let pageNum = parseInt(pageString[pageString.length - 1])
 
-  // stops page from going below 0
-  if (pageNum + dir === 0) {
-    console.warn('Page cannot go below 0.')
-    return
-  }
   fetchCards(pageNum + dir)
 }
 
