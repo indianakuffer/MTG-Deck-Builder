@@ -1,7 +1,7 @@
 let previousSearch
 let pageSize = 50
 let deck = {
-  name: 'myDeck',
+  name: 'defaultDeck',
   contents: {},
 }
 
@@ -377,13 +377,23 @@ function loadDeck(deckName = Object.keys(localStorage)[0]) {
     const loadedDeck = JSON.parse(localStorage[deckName])
     deck.contents = loadedDeck
     deck.name = deckName
+    console.log(`Loaded deck '${deck.name}'`)
     renderDeckList()
   } catch (error) {
-    console.error(`localStorage deck '${deckName}' not found`)
+    console.warn(`localStorage deck '${deckName}' not found. Using deck '${deck.name}'`)
     return
   }
 }
 
-function saveDeck(deckName) {
+function saveDeck(deckName = deck.name) {
   localStorage.setItem(deckName, JSON.stringify(deck.contents))
+}
+
+function switchDeck() {
+  let deckOptions = Object.keys(localStorage)
+  const switchTo = window.prompt(`Which deck would you like to load?: ${deckOptions}`)
+  loadDeck(switchTo)
+  if (document.querySelector('#deck-container').classList.contains('hidden')) {
+    toggleDeckView()
+  }
 }

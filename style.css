@@ -254,6 +254,7 @@ transform: translateY(1px);
   color: black;
   padding: 10px;
   display: flex;
+  flex-flow: row wrap;
   justify-content: space-between;
 }
 
