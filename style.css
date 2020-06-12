@@ -145,6 +145,7 @@ header {
   border-radius: 14px;
   flex-basis: 250px;
   transition: transform 0.2s ease;
+  max-width: max-content;
 }
 
 .card:hover {

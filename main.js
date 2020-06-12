@@ -83,13 +83,13 @@ function turnPage(dir) {
     alert('Make a search first!')
     return
   }
+  const pageLocation = previousSearch.indexOf('page=')
+  let pageString = previousSearch.substring(pageLocation, pageLocation + 6)
+  let pageNum = parseInt(pageString[pageString.length - 1])
   if (pageNum + dir === 0) {
     alert('You\'re at the first page.')
     return
   }
-  const pageLocation = previousSearch.indexOf('page=')
-  let pageString = previousSearch.substring(pageLocation, pageLocation + 6)
-  let pageNum = parseInt(pageString[pageString.length - 1])
 
   fetchCards(pageNum + dir)
 }
