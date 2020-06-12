@@ -9,6 +9,7 @@ let deck = {
 initEventListeners()
 fillSets()
 fillTypes()
+loadDeck()
 
 // Functions
 
@@ -217,6 +218,8 @@ function renderDeckList() {
     text.append(preview)
   }
 
+  saveDeck()
+
   if (Object.keys(deck.contents).length > 0 && testHandButton.classList.contains('hidden')) {
     testHandButton.classList.remove('hidden')
   } else if (Object.keys(deck).length <= 0) {
@@ -370,9 +373,14 @@ function logLocalStorage() {
 }
 
 function loadDeck() {
-  const loadedDeck = JSON.parse(localStorage['myDeck'])
-  deck.contents = loadedDeck
-  renderDeckList()
+  try {
+    const loadedDeck = JSON.parse(localStorage['myDeck'])
+    deck.contents = loadedDeck
+    renderDeckList()
+  } catch (error) {
+    console.error('localStorage deck not found')
+    return
+  }
 }
 
 function saveDeck() {
