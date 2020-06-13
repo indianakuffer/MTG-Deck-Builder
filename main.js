@@ -9,6 +9,7 @@ let deck = {
 initEventListeners()
 fillSets()
 fillTypes()
+fillDeckList()
 loadDeck()
 
 // Functions
@@ -344,6 +345,7 @@ function toggleHidden(element) {
 function initEventListeners() {
   const searchFormContainer = document.querySelector('#search-form-container')
   const testHandContainer = document.querySelector('#test-hand-container')
+  const deckListContainer = document.querySelector('#deck-list-container')
 
   document.querySelector('form').addEventListener('submit', () => {
     event.preventDefault()
@@ -359,21 +361,64 @@ function initEventListeners() {
   document.querySelector('#test-hand').addEventListener('click', () => {
     event.stopPropagation()
   })
+  deckListContainer.addEventListener('click', () => toggleHidden(deckListContainer))
+  document.querySelector('#deck-list').addEventListener('click', () => {
+    event.stopPropagation()
+  })
   document.querySelector('.page-btn.left').addEventListener('click', () => turnPage(-1))
   document.querySelector('.page-btn.right').addEventListener('click', () => turnPage(1))
   document.querySelector('#detail-view-btn').addEventListener('click', toggleDeckView)
   document.querySelector('#test-hand-btn').addEventListener('click', testHand)
 }
 
-function logLocalStorage() {
+function fillDeckList() {
   const localKeys = Object.keys(localStorage)
+  const deckListContainer = document.querySelector('#deck-list-container')
+  const deckList = document.querySelector('#deck-list')
+  deckList.innerHTML = ''
+  const newDeckButton = document.createElement('button')
+  newDeckButton.classList.add('btn')
+  newDeckButton.textContent = '+Add Deck'
+  newDeckButton.addEventListener('click', newDeck)
+  deckList.append(newDeckButton)
+
   localKeys.forEach(key => {
-    console.log(key, localStorage[key])
+    const deckListingContainer = document.createElement('div')
+    deckListingContainer.classList.add('deck-listing-container')
+
+    const deckListing = document.createElement('div')
+    deckListing.classList.add('deck-listing', 'btn')
+    deckListing.textContent = key
+    deckListing.addEventListener('click', () => {
+      loadDeck(key)
+      deckListContainer.classList.contains('hidden') ? null : toggleHidden(deckListContainer)
+    })
+
+    const removeButton = document.createElement('button')
+    removeButton.textContent = '-'
+    removeButton.classList.add('remove-deck-btn')
+    removeButton.addEventListener('click', () => { removeDeck(key) })
+
+    deckList.append(deckListingContainer)
+    deckListingContainer.append(deckListing)
+    deckListingContainer.append(removeButton)
   })
 }
 
-function loadDeck(deckName = Object.keys(localStorage)[0]) {
+function removeDeck(key) {
+  delete localStorage[key]
+  if (deck.name === key) {
+    deck.contents = {}
+    loadDeck('defaultDeck')
+    alert('Deleted currently loaded deck, loading \'defaultDeck\'')
+  }
+  fillDeckList()
+  renderDeckList()
+}
+
+function loadDeck(deckName = 'defaultDeck') {
   try {
+    Object.keys(deck.contents).length > 0 ? saveDeck() : null
     const loadedDeck = JSON.parse(localStorage[deckName])
     deck.contents = loadedDeck
     deck.name = deckName
@@ -381,6 +426,9 @@ function loadDeck(deckName = Object.keys(localStorage)[0]) {
     renderDeckList()
   } catch (error) {
     console.warn(`localStorage deck '${deckName}' not found. Using deck '${deck.name}'`)
+    deck.name = 'defaultDeck'
+    deck.contents = {}
+    saveDeck()
     return
   }
 }
@@ -389,10 +437,13 @@ function saveDeck(deckName = deck.name) {
   localStorage.setItem(deckName, JSON.stringify(deck.contents))
 }
 
-function switchDeck() {
-  let deckOptions = Object.keys(localStorage)
-  const switchTo = window.prompt(`Which deck would you like to load?: ${deckOptions}`)
-  loadDeck(switchTo)
+function newDeck() {
+  saveDeck()
+  deck.name = window.prompt('Enter the new deck\'s name')
+  deck.contents = {}
+  saveDeck()
+  loadDeck(deck.name)
+  fillDeckList()
   if (document.querySelector('#deck-container').classList.contains('hidden')) {
     toggleDeckView()
   }
