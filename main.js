@@ -369,7 +369,10 @@ function initEventListeners() {
   document.querySelector('.page-btn.right').addEventListener('click', () => turnPage(1))
   document.querySelector('#detail-view-btn').addEventListener('click', toggleDeckView)
   document.querySelector('#test-hand-btn').addEventListener('click', testHand)
-  document.querySelector('#deck-swap-btn').addEventListener('click', () => { toggleHidden(deckListContainer) })
+  document.querySelector('#deck-swap-btn').addEventListener('click', () => {
+    fillDeckList()
+    toggleHidden(deckListContainer)
+  })
 }
 
 function fillDeckList() {
