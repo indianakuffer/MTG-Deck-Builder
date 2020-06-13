@@ -298,14 +298,19 @@ transform: translateY(1px);
   display: unset;
 }
 
+#deck-btn-container {
+  display: flex;
+  justify-content: space-around;
+}
+
 #test-hand-btn {
   width: 100px;
-  margin: 15px auto;
 }
 
-#test-hand-container {
-
+#deck-swap-btn {
+  width: 100px;
 }
+
 
 #test-hand {
   position: relative;
