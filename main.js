@@ -312,6 +312,11 @@ async function fillSets() {
   try {
     const response = await axios.get('https://api.magicthegathering.io/v1/sets')
     const dropdown = document.querySelector('#input-sets')
+    dropdown.innerHTML = ''
+    const defaultOption = document.createElement('option')
+    defaultOption.textContent = '--'
+    defaultOption.value = ''
+    dropdown.append(defaultOption)
     response.data.sets.forEach(set => {
       const newOption = document.createElement('option')
       newOption.textContent = set.name
@@ -327,6 +332,11 @@ async function fillTypes() {
   try {
     const response = await axios.get('https://api.magicthegathering.io/v1/types')
     const dropdown = document.querySelector('#input-types')
+    dropdown.innerHTML = ''
+    const defaultOption = document.createElement('option')
+    defaultOption.textContent = '--'
+    defaultOption.value = ''
+    dropdown.append(defaultOption)
     response.data.types.forEach(type => {
       const newOption = document.createElement('option')
       newOption.textContent = type
