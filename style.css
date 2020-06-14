@@ -150,6 +150,7 @@ header {
   flex-flow: row;
   justify-content: center;
   margin: 20px 0;
+  margin-top: auto;
 }
 
 .page-btn {
