@@ -60,11 +60,13 @@ async function fetchCards(page = 1) {
     const cardList = response.data.cards
     removeLoading(interval)
     console.log(cardList)
-    if (cardList.length === 0) { alert('Sorry, that returned no results.') }
+    paginationHiding(cardList, page)
+    if (cardList.length === 0) {
+      alert('Sorry, that returned no results.')
+    }
     cardList.forEach((card) => {
       renderCard(card)
     })
-
   } catch (error) {
     console.error(error)
   }
@@ -81,6 +83,27 @@ function renderCard(card) {
   cardElement.addEventListener('click', () => { moreDetails(card) })
 
   document.querySelector('#card-container').append(cardElement)
+}
+
+function paginationHiding(cardList, page) {
+  const pageBtnContainer = document.querySelector('#page-btn-container')
+  const pageBtnLeft = document.querySelector('.page-btn.left')
+  const pageBtnRight = document.querySelector('.page-btn.right')
+  if (cardList.length === 0) {
+    pageBtnContainer.classList.add('hidden')
+  } else {
+    pageBtnContainer.classList.remove('hidden')
+  }
+  if (cardList.length < pageSize) {
+    pageBtnRight.classList.add('hidden')
+  } else {
+    pageBtnRight.classList.remove('hidden')
+  }
+  if (page <= 1) {
+    pageBtnLeft.classList.add('hidden')
+  } else {
+    pageBtnLeft.classList.remove('hidden')
+  }
 }
 
 function turnPage(dir) {
