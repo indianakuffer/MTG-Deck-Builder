@@ -59,7 +59,6 @@ async function fetchCards(page = 1) {
     const response = await axios.get(url)
     const cardList = response.data.cards
     removeLoading(interval)
-    console.log(cardList)
     paginationHiding(cardList, page)
     if (cardList.length === 0) {
       alert('Sorry, that returned no results.')
@@ -347,7 +346,7 @@ async function fillSets() {
       dropdown.append(newOption)
     })
   } catch (error) {
-    console.error(error)
+    return
   }
 }
 
@@ -367,7 +366,7 @@ async function fillTypes() {
       dropdown.append(newOption)
     })
   } catch (error) {
-    console.error(error)
+    return
   }
 }
 
@@ -459,10 +458,8 @@ function loadDeck(deckName = 'defaultDeck') {
     const loadedDeck = JSON.parse(localStorage[deckName])
     deck.contents = loadedDeck
     deck.name = deckName
-    console.log(`Loaded deck '${deck.name}'`)
     renderDeckList()
   } catch (error) {
-    console.warn(`localStorage deck '${deckName}' not found. Using deck '${deck.name}'`)
     deck.name = 'defaultDeck'
     deck.contents = {}
     saveDeck()

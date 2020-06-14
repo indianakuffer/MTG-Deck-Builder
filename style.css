@@ -122,7 +122,7 @@ header {
 }
 
 .starter-text {
-  margin-top: 50%;
+  margin-top: calc(50% - 100px);
   align-self: center;
   opacity: 0.7;
   font-size: 22px;
@@ -222,6 +222,7 @@ transform: translateY(1px);
   width: 60%;
   max-width: 400px;
   border-radius: 14px;
+  margin-top: 50px;
 }
 
 .info-container {
@@ -523,7 +524,7 @@ https://mkrtchyan.ga
   }
 
   .starter-text {
-    margin: 0 auto;
+    margin: 50% auto;
   }
 
   #card-panel {
@@ -569,5 +570,9 @@ https://mkrtchyan.ga
 
   #test-hand img {
     width: 45%;
+  }
+
+  .detail-card {
+    margin: 0px;
   }
 }
