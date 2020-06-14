@@ -338,7 +338,7 @@ MTG Deck Builder is a tool for users to search a database of all the Magic: The 
 
 | Component | Priority | Estimated Time | Time Invested | Actual Time |
 | --- | :---: |  :---: | :---: | :---: |
-| Core HTML & CSS | M | 1.5hrs| 1.25hrs | 1.25hrs |
+| Core HTML & CSS | M | 1.5hrs| 1.5hrs | 1.5hrs |
 | API Fetch w/ Queries | H | 2.5hrs| 2.5hrs | 2.5hrs |
 | Render Cards to DOM | H | 1hrs| .25hrs | .25hrs |
 | Page Buttons | M | 1hrs| .5hrs | .5hrs |
@@ -347,20 +347,23 @@ MTG Deck Builder is a tool for users to search a database of all the Magic: The 
 | *Deck View Panel & Button* | H | 1.5hrs| .5hrs | .5hrs |
 | *Deck Object & Refreshing* | H | 1.5hrs| 1hrs | 1hrs |
 | *Deck Shuffling & Test Hand Display* | M | 1.5hrs| 2hrs | 2hrs |
-| *Advanced CSS and Styling* | M | 4hrs| 6hrs | 6hrs |
+| *Advanced CSS and Styling* | M | 4hrs| 7hrs | 7hrs |
 | *Tweaks, QOL* | L | 2hrs| 5hrs | 5hrs |
-| *Post Post MVP Features* | L | 3hrs| 4hrs | 4hrs |
-| Total | H | 21hrs| 28.75hrs | 28.75hrs |
+| *Post Post MVP Features* | L | 3hrs| 7hrs | 7hrs |
+| Total | H | 21hrs| 33hrs | 33hrs |
 
 ## Code Snippet
 
-`Use this section to include a brief code snippet of functionality that you are proud of and a brief description.`
+This was initially two seperate incrementCard and decrementCard functions, but I decided to combine them with the additional amount parameter to add some DRYness.
 
-```
-function reverse(string) {
-	// here is the code to reverse a string of text
+```JS
+function crementCard(card, amount) {
+  deck.contents[card].quantity += amount
+  if (deck.contents[card].quantity <= 0) {
+    delete deck.contents[card]
+  }
+  renderDeckList()
 }
 ```
 
 ## Change Log
- `Use this section to document what changes were made and the reasoning behind those changes.`
