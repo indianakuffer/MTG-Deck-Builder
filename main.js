@@ -142,27 +142,27 @@ function moreDetails(card) {
 
   // name
   const name = document.createElement('p')
-  name.textContent = `Name: ${card.name}`
+  name.innerHTML = `<strong>Name:</strong> ${card.name}`
 
   // originalType
   const originalType = document.createElement('p')
-  originalType.textContent = `Type: ${card.originalType}`
+  originalType.innerHTML = `<strong>Type:</strong> ${card.originalType}`
 
   // originalText
   const originalText = document.createElement('p')
-  originalText.textContent = `Text: ${card.originalText}`
+  originalText.innerHTML = `<strong>Text:</strong> ${card.originalText}`
 
   // rarity
   const rarity = document.createElement('p')
-  rarity.textContent = `Rarity: ${card.rarity}`
+  rarity.innerHTML = `<strong>Rarity:</strong> ${card.rarity}`
 
   // setName
   const setName = document.createElement('p')
-  setName.textContent = `Set: ${card.setName}`
+  setName.innerHTML = `<strong>Set:</strong> ${card.setName}`
 
   // artist
   const artist = document.createElement('p')
-  artist.textContent = `Artist: ${card.artist}`
+  artist.innerHTML = `<strong>Artist:</strong> ${card.artist}`
 
   // button
   const button = document.createElement('button')
@@ -245,7 +245,7 @@ function renderDeckList() {
 
   if (Object.keys(deck.contents).length > 0 && testHandButton.classList.contains('hidden')) {
     testHandButton.classList.remove('hidden')
-  } else if (Object.keys(deck).length <= 0) {
+  } else if (Object.keys(deck.contents).length <= 0) {
     testHandButton.classList.add('hidden')
   }
 }
