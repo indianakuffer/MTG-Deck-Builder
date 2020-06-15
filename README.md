@@ -3,6 +3,7 @@
 ## Project Name
 
 MTG Deck Builder
+[https://pages.git.generalassemb.ly/indianakuffer/MTG-Deck-Builder/] (https://pages.git.generalassemb.ly/indianakuffer/MTG-Deck-Builder/)
 
 ## Project Description
 
