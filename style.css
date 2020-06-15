@@ -556,11 +556,13 @@ https://mkrtchyan.ga
 
   .info-container {
     max-width: 80%;
-
+    margin-top: 20px;
   }
+
   .info-container p {
     font-size: 12px;
-    margin: 3px 0px;
+    margin: 5px 0px;
+    line-height: 1.3;
   }
 
   #test-hand {
