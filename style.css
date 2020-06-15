@@ -573,6 +573,7 @@ https://mkrtchyan.ga
     flex-basis: unset;
     border-left: none;
     border-top: 2px solid rgba(255, 255, 255, 0.1);
+    height: inherit;
   }
 
   #detail-panel h1 {
