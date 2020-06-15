@@ -373,6 +373,32 @@ transform: translateY(1px);
   background-color: white;
 }
 
+#info-footer {
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  bottom: 5px;
+  font-size: 12px;
+  width: 100%;
+}
+
+#info-footer p {
+  margin: 5px;
+  color: white;
+  filter: opacity(0.5);
+  transition: filter 0.5s ease;
+}
+
+#info-footer p:hover {
+  filter: unset;
+}
+
+#info-footer a {
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid white;
+}
+
 /***** general *****/
 
 .btn {
