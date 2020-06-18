@@ -610,4 +610,8 @@ https://mkrtchyan.ga
   .detail-card {
     margin: 0px;
   }
+
+  #info-footer {
+    justify-content: space-around;
+  }
 }
