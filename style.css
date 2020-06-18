@@ -612,6 +612,7 @@ https://mkrtchyan.ga
   }
 
   #info-footer {
+    position: unset;
     justify-content: space-around;
   }
 }
