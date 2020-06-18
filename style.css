@@ -553,7 +553,6 @@ https://mkrtchyan.ga
 
   #main-container {
     flex-flow: column;
-    height: calc(100vh + 50px);
   }
 
   .starter-text {
@@ -613,5 +612,6 @@ https://mkrtchyan.ga
 
   #info-footer {
     justify-content: space-around;
+    position: unset;
   }
 }
